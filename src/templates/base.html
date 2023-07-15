@@ -1,15 +1,84 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>This is the header</title>
-    </head>
-
-
-    <body>
-        <h1>This is the body</h1>
-    </body>
-
-    <footer>
-        <h3>This is the footer</h3>
-    </footer>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cool Site</title>
+  <style>
+    /* CSS styles for the page */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+    
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+    
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    nav ul li a:hover {
+      color: #ff6f00;
+    }
+    
+    main {
+      padding: 20px;
+    }
+    
+    h2 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      color: #666;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cool Site</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Info</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    {% block content %}
+    {% endblock content %}
+  </main>
+</body>
 </html>
