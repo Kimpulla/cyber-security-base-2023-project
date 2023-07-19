@@ -74,6 +74,10 @@ TEMPLATES = [
     },
 ]
 
+#Overrides django, uses this instead.
+AUTH_USER_MODEL = 'account.Account'
+
+
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
