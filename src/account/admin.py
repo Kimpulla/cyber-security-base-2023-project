@@ -4,8 +4,8 @@ from account.models import Account
 
 
 class AccountAdmin(UserAdmin):
-	list_display = ('email','username','date_joined', 'last_login', 'is_admin','is_staff')
-	search_fields = ('email','username',)
+	list_display = ('email','username','date_joined', 'last_login', 'is_admin','is_staff') #shows what rights user has
+	search_fields = ('email','username',) #creates search field
 	readonly_fields=('date_joined', 'last_login')
 
 	filter_horizontal = ()
