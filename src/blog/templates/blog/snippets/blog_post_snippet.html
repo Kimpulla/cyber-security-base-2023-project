@@ -14,7 +14,9 @@
 		<!-- Blog Post -->
 		<div class="card m-auto">
 			<a href="{% url 'blog:detail' post.slug %}">
-				<img class="card-img-top" src="{{blog_post.image.url}}">
+                {% if blog_post.image %}
+				    <img class="card-img-top" src="{{blog_post.image.url}}">
+                {% endif %}
 			</a>
 			<div class="card-body mt-2 mb-2">
 				<a href="{% url 'blog:detail' post.slug %}">
@@ -31,9 +33,7 @@
 		</div>
 	</div>
 </div>
-
 {% else %}
-
 <div class="container">
 	<div class="row">
 		<div class="card m-auto">
@@ -44,5 +44,4 @@
 		</div>
 	</div>
 </div>
-
 {% endif %}
