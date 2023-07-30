@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
 <style type="text/css">
+  body {
+    background: #F8F8F8;
+    font-family: Arial, sans-serif;
+  }
   .form-signin {
     width: 100%;
     max-width: 330px;
     padding: 15px;
     margin: auto;
+    background: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  .form-signin:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
   .form-signin .form-control {
     position: relative;
@@ -16,33 +26,67 @@
     height: auto;
     padding: 10px;
     font-size: 16px;
+    border-radius: 5px;
   }
   .form-signin .form-control:focus {
     z-index: 2;
+    border-color: #007BFF;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
   }
-  .form-signin input[type="email"] {
-    margin-bottom: 10px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
+  .form-signin input[type="email"],
   .form-signin input[type="username"] {
     margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
   }
-  .h3{
+  .form-signin .btn {
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  .form-signin .btn:hover {
+    background: #0069D9;
+  }
+  .h3 {
     text-align: center;
+    color: #333333;
   }
-  .blog-posts{
+  .blog-posts {
     max-width: 500px;
     width: 100%;
     margin: auto;
+    background: #FFFFFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease-in-out;
   }
+  .blog-posts:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+  .blog-posts .list-group-item {
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  .blog-posts .list-group-item:hover {
+    background: #F8F8F8;
+  }
+  .d-flex a {
+    color: #007BFF;
+    transition: color 0.3s ease-in-out;
+  }
+  .d-flex a:hover {
+    color: #0056B3;
+  }
+  .center-screen {
+    display: flex;
+    justify-content: center;
+    height: 5vh;
+    color: #0056B3;
+  }
+
 </style>
 
 <!--Form begins here-->
 <form class="form-signin" method="post">{% csrf_token %}
-
+  
   <h1 class="h3 mb-3 font-weight-normal">Account</h1>
   <!-- Email input field -->
   <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus value={{account_form.initial.email}}>
@@ -79,7 +123,7 @@
 
 </form>
 <!-- Link to change password page -->
-<div class="d-flex flex-column">
+<div class="flex-column center-screen">
   <a class="m-auto" href="{% url 'password_change' %}">Change password</a>
 </div>
 
@@ -102,11 +146,4 @@
   </div>
 </div>
 
-
-
-
-
-
 {% endblock content %}
-
-
