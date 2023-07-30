@@ -1,5 +1,3 @@
-# cyber-mooc/mysite/login_attempt_middleware.py
-
 from django.utils import timezone
 from django.core.cache import cache
 from django.conf import settings
