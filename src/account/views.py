@@ -3,11 +3,10 @@ from django.contrib.auth import login, authenticate, logout
 
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 from blog.models import BlogPost
-from account.models import Account
 
 # Cryptographic failure
-# Currently stores password as text (FIX)
-def registration_view(request):
+# Currently stores password as text
+""" def registration_view(request):
     context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
@@ -28,7 +27,46 @@ def registration_view(request):
     else:
         form = RegistrationForm()
         context['registration_form'] = form
-    return render(request, 'account/register.html', context)
+    return render(request, 'account/register.html', context) """
+
+
+# Fixed Cryptographic failure
+def registration_view(request):
+
+	# Create an empty dictionary to hold context data for the template
+	context = {}
+
+	if request.POST:
+		# Create a RegistrationForm instance with the submitted data
+		form = RegistrationForm(request.POST)
+
+		# Check if the form data is valid
+		if form.is_valid():
+			# Save the user to the database
+			form.save()
+
+			# Retrieve the email and password from the validated data
+			email = form.cleaned_data.get('email')
+			raw_password = form.cleaned_data.get('password1')
+
+			# Authenticate the user
+			account = authenticate(email=email, password=raw_password)
+
+			# Log the user in
+			login(request, account)
+			return redirect('home')
+		else:
+			# If the form data is invalid, add the form to the context to display validation errors
+			context['registration_form'] = form
+
+	else:
+		# If the request method is not POST, create an empty RegistrationForm
+		form = RegistrationForm()
+		context['registration_form'] = form
+		
+	# Render the registration template with the context
+	return render(request, 'account/register.html', context)
+
 
 def logout_view(request):
 	logout(request)
