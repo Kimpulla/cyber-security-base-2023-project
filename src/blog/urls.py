@@ -4,6 +4,7 @@ from blog.views import (
 	detail_blog_view,
 	edit_blog_view,
 )
+from . import views
 # Set the app namespace to 'blog'
 app_name = 'blog'
 
@@ -12,11 +13,13 @@ urlpatterns = [
     # URL pattern for creating a new blog post
     path('create/', create_blog_view, name="create"),
 
+    path('search/', views.search, name='search'),
+
     # URL pattern for viewing a blog post in detail using its slug
     path('<slug>/', detail_blog_view, name="detail"),
 
     # URL pattern for editing an existing blog post using its slug
     path('<slug>/edit/', edit_blog_view, name="edit"),
- ]
+]
 
 

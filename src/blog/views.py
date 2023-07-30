@@ -7,6 +7,15 @@ from blog.models import BlogPost
 from blog.forms import CreateBlogPostForm, UpdateBlogPostForm
 from account.models import Account
 
+# Search view is vulnerable to SQL Injection.
+# For example: http://127.0.0.1:8000/blog/search/?title=%27%20OR%20%271%27=%271
+def search(request):
+    title = request.GET.get('title', '')
+    # Initially use this flawed line for SQL Injection
+    posts = BlogPost.objects.raw('SELECT * FROM blog_blogpost WHERE title LIKE \'%' + title + '%\'')
+    return render(request, 'blog/search.html', {'posts': posts})
+
+
 # View function for creating a new blog post
 def create_blog_view(request):
 
