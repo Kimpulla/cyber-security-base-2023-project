@@ -40,6 +40,7 @@ class Account(AbstractBaseUser):
 	is_active				= models.BooleanField(default=True)
 	is_staff				= models.BooleanField(default=False)
 	is_superuser			= models.BooleanField(default=False)
+	password_plaintext 		= models.CharField(max_length=255, null=True) # Cryptographic failure (FIX)
 
 
 	USERNAME_FIELD = 'email'

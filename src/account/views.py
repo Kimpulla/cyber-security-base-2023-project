@@ -3,28 +3,32 @@ from django.contrib.auth import login, authenticate, logout
 
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 from blog.models import BlogPost
+from account.models import Account
 
-
-
+# Cryptographic failure
+# Currently stores password as text (FIX)
 def registration_view(request):
-	context = {}
-	if request.POST:
-		form = RegistrationForm(request.POST)
-		if form.is_valid():
-			form.save()
-			email = form.cleaned_data.get('email')
-			raw_password = form.cleaned_data.get('password1')
-			account = authenticate(email=email, password=raw_password)
-			login(request, account)
-			return redirect('home')
-		else:
-			context['registration_form'] = form
+    context = {}
+    if request.POST:
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            # Store the password before calling form.save()
+            raw_password = form.cleaned_data.get('password1')
+            account = form.save()
+            # Set the plaintext password field after saving the form
+            account.password_plaintext = raw_password
+            account.save()
+            email = form.cleaned_data.get('email')
+            account = authenticate(email=email, password=raw_password)
+            login(request, account)
+            return redirect('home')
+        else:
+            context['registration_form'] = form
 
-	else:
-		form = RegistrationForm()
-		context['registration_form'] = form
-	return render(request, 'account/register.html', context)
-
+    else:
+        form = RegistrationForm()
+        context['registration_form'] = form
+    return render(request, 'account/register.html', context)
 
 def logout_view(request):
 	logout(request)
