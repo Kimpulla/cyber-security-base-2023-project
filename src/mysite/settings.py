@@ -64,7 +64,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'mysite.login_attempt_middleware.LoginAttemptMiddleware',
 ]
+
+
+LOGIN_ATTEMPTS_MAX = 5  # Maximum number of login attempts allowed.
+LOGIN_ATTEMPTS_TIMEOUT = 600  # Timeout in seconds for locking out the user (600 seconds = 10 minutes).
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+    }
+}
 
 ROOT_URLCONF = 'mysite.urls'
 
