@@ -22,9 +22,10 @@
 			<div class="card-body mt-2 mb-2">
 			  <h2 class="card-title">{{blog_post.title}}</h2>
 			  <p class="card-text">{{blog_post.body|safe}}</p>
-			  {% if blog_post.author == request.user %}
-			  	<a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
-			  {% endif %}
+			  <!--Allows any authenticated users to see update button-->
+			  	{% if user.is_authenticated %}
+					<a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
+				{% endif %}
 			</div>
 			<div class="card-footer text-muted">
 			  Updated on {{blog_post.date_updated}} by {{blog_post.author}}

@@ -54,7 +54,11 @@ def detail_blog_view(request, slug):
 	return render(request, 'blog/detail_blog.html', context)
 
 
-# View function for editing an existing blog post
+# View function for editing an existing blog post with broken access control
+
+# Broken Acces Control vulnerability
+# FIX
+# Now any logged-in user can edit any post.
 def edit_blog_view(request, slug):
 
 	context = {}
@@ -65,10 +69,6 @@ def edit_blog_view(request, slug):
 		return redirect("must_authenticate")
 	
 	blog_post = get_object_or_404(BlogPost, slug=slug)
-
-	# Return an error response if the current user is not the author of the post
-	if blog_post.author != user:
-		return HttpResponse('You are not the author of that post.')
 
 	if request.POST:
 		form = UpdateBlogPostForm(request.POST or None, request.FILES or None, instance=blog_post)
@@ -87,6 +87,7 @@ def edit_blog_view(request, slug):
 		)
 	context['form'] = form
 	return render(request, 'blog/edit_blog.html', context)
+
 
 # Function for getting the queryset of blog posts based on search queries
 def get_blog_queryset(query=None):
