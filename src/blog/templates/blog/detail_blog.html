@@ -36,11 +36,29 @@
 			  Updated on {{blog_post.date_updated}} by {{blog_post.author}}
 			</div>
 		</div>
+
+	<!-- Comments Section -->
+	<!--Cross-Site Scripting (XSS) vulnerability-->
+		<div class="card m-auto mt-4">
+			<div class="card-body">
+				<h5>Comments:</h5>
+				{% for comment in comments %}
+					<div>
+						<h6>{{ comment.author.username }}</h6>
+						<p>{{ comment.text|safe }}</p> <!-- The safe filter is used to render html tags -->
+					</div>
+				{% endfor %}
+				<!-- Comment Form -->
+				<form method="post">
+					{% csrf_token %}
+					{{ form.as_p }}
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 
-
 {% endblock content %}
-
 
 

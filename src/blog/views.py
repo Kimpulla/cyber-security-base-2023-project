@@ -7,6 +7,13 @@ from blog.models import BlogPost
 from blog.forms import CreateBlogPostForm, UpdateBlogPostForm
 from account.models import Account
 
+# For comments
+# Cross-Site Scripting (XSS)
+from blog.forms import CommentForm
+from blog.models import Comment
+from django.http import HttpResponseRedirect
+
+
 # Search view is vulnerable to SQL Injection.
 # For example: http://127.0.0.1:8000/blog/search/?title=%27%20OR%20%271%27=%271
 """ def search(request):
@@ -46,12 +53,33 @@ def create_blog_view(request):
 	return render(request, "blog/create_blog.html", context)
 
 # View function for displaying the details of a blog post
+# Contains Cross-Site Scripting (XSS) vulnerability.
+# User can run Javascript in comments.
 def detail_blog_view(request, slug):
-
-	context = {}
 	blog_post = get_object_or_404(BlogPost, slug=slug)
+	context = {}
+
+	# Add this part for comment form
+	if request.method == "POST":
+		form = CommentForm(request.POST or None)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.post = blog_post
+			comment.user = request.user
+			comment.save()
+			return HttpResponseRedirect(request.path)
+	else:
+		form = CommentForm()
+
+	# Fetch comments related to this post
+	comments = Comment.objects.filter(post=blog_post)
+
 	context['blog_post'] = blog_post
+	context['comments'] = comments
+	context['form'] = form
+
 	return render(request, 'blog/detail_blog.html', context)
+
 
 
 # Broken Acces Control vulnerability
