@@ -32,7 +32,6 @@ class UpdateBlogPostForm(forms.ModelForm):
 			blog_post.save()
 		return blog_post
 	
-# Cross-Site Scripting (XSS) vulnerability
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment

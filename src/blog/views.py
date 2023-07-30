@@ -8,7 +8,6 @@ from blog.forms import CreateBlogPostForm, UpdateBlogPostForm
 from account.models import Account
 
 # For comments
-# Cross-Site Scripting (XSS)
 from blog.forms import CommentForm
 from blog.models import Comment
 from django.http import HttpResponseRedirect
@@ -53,32 +52,44 @@ def create_blog_view(request):
 	return render(request, "blog/create_blog.html", context)
 
 # View function for displaying the details of a blog post
-# Contains Cross-Site Scripting (XSS) vulnerability.
-# User can run Javascript in comments.
+# Fixed Cross-Site Scripting (XSS) vulnerability.
 def detail_blog_view(request, slug):
-	blog_post = get_object_or_404(BlogPost, slug=slug)
-	context = {}
+    
+     # Get the BlogPost object with the given slug or return a 404 error
+    blog_post = get_object_or_404(BlogPost, slug=slug)
+    
+    # Create an empty dictionary to hold the context for rendering the template
+    context = {}
 
-	# Add this part for comment form
-	if request.method == "POST":
-		form = CommentForm(request.POST or None)
-		if form.is_valid():
-			comment = form.save(commit=False)
-			comment.post = blog_post
-			comment.user = request.user
-			comment.save()
-			return HttpResponseRedirect(request.path)
-	else:
-		form = CommentForm()
+    # Add this part for comment form
+    if request.method == "POST":
+        form = CommentForm(request.POST or None)
+	
+	    # Check if the form data is valid
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = blog_post
+            comment.user = request.user
+            comment.save()
+	    
+		    # Redirect back to the same page after submitting the comment
+            return HttpResponseRedirect(request.path)
+    else:
+	    # If the request method is not POST, create an empty CommentForm instance
+        form = CommentForm()
 
-	# Fetch comments related to this post
-	comments = Comment.objects.filter(post=blog_post)
+    # Fetch comments related to this post
+    comments = Comment.objects.filter(post=blog_post)
 
-	context['blog_post'] = blog_post
-	context['comments'] = comments
-	context['form'] = form
+    # Sanitize the comment text before rendering
+    for comment in comments:
+        comment.text = comment.sanitized_text()
 
-	return render(request, 'blog/detail_blog.html', context)
+    context['blog_post'] = blog_post
+    context['comments'] = comments
+    context['form'] = form
+
+    return render(request, 'blog/detail_blog.html', context)
 
 
 

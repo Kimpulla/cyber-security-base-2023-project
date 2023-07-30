@@ -1,64 +1,55 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
-
 <style type="text/css">
-	.card{
-		max-width: 700px;
-	}
-	.card-body{
-		padding: 20px;
-	}
+    .card {
+        max-width: 700px;
+    }
+    .card-body {
+        padding: 20px;
+    }
 </style>
 
 <div class="container">
-	<div class="row">
+    <div class="row">
 
-		<!-- Blog Post -->
-		<div class="card m-auto">
-			<img class="card-img-top" src="{{blog_post.image.url}}">
-			<div class="card-body mt-2 mb-2">
-			  <h2 class="card-title">{{blog_post.title}}</h2>
-			  <p class="card-text">{{blog_post.body|safe}}</p>
-			    <!--Allows any authenticated users to see update button-->
-			  	<!-- 	{% if user.is_authenticated %}
-					<a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
-				{% endif %} -->
+        <!-- Blog Post -->
+        <div class="card m-auto">
+            <img class="card-img-top" src="{{ blog_post.image.url }}">
+            <div class="card-body mt-2 mb-2">
+                <h2 class="card-title">{{ blog_post.title }}</h2>
+                <p class="card-text">{{ blog_post.body|safe }}</p>
+                {% if blog_post.author == request.user %}
+                    <a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
+                {% endif %}
+            </div>
+            <div class="card-footer text-muted">
+                Updated on {{ blog_post.date_updated }} by {{ blog_post.author }}
+            </div>
+        </div>
 
-			  <!--Fixed Broken acces control vulnerability!-->
-			  {% if blog_post.author == request.user %}
-			  	<a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Update</a>
-			  {% endif %}
-			</div>
-			<div class="card-footer text-muted">
-			  Updated on {{blog_post.date_updated}} by {{blog_post.author}}
-			</div>
-		</div>
-
-	<!-- Comments Section -->
-	<!--Cross-Site Scripting (XSS) vulnerability-->
-		<div class="card m-auto mt-4">
-			<div class="card-body">
-				<h5>Comments:</h5>
-				{% for comment in comments %}
-					<div>
-						<h6>{{ comment.author.username }}</h6>
-						<p>{{ comment.text|safe }}</p> <!-- The safe filter is used to render html tags -->
-					</div>
-				{% endfor %}
-				<!-- Comment Form -->
-				<form method="post">
-					{% csrf_token %}
-					{{ form.as_p }}
-					<button type="submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div>
+        <!-- Comments Section -->
+        <!-- Fixed Cross-Site Scripting (XSS) vulnerability-->
+        <div class="card m-auto mt-4">
+            <div class="card-body">
+                <h5>Comments:</h5>
+                {% for comment in comments %}
+                    <div>
+                        <h6>{{ comment.author.username }}</h6>
+                        <!-- Use mark_safe to render user input as safe -->
+                        <p>{{ comment.text|safe }}</p>
+                    </div>
+                {% endfor %}
+                <!-- Comment Form -->
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
-
-
