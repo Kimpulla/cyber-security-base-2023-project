@@ -36,15 +36,17 @@
   }
 </style>
 
-
+<!-- Login Form begins here -->
 <form class="form-signin" method="post">{% csrf_token %}
   <div class="d-flex flex-column pb-3">
   </div>
   
   <h1 class="h3 mb-3 font-weight-normal">Login</h1>
 
+  <!-- Email input field -->
   <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-  
+
+  <!-- Password input field -->
   <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
 
   {% for field in login_form %}
@@ -54,17 +56,18 @@
         {% endfor %}
       </p>
   {% endfor %}
+    <!-- Display non-field errors, if any -->
   {% if login_form.non_field_errors %}
     <div style="color: red">
       <p>{{login_form.non_field_errors}}</p>
     </div>
       
   {% endif %}
-
+  <!-- Submit button -->
   <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
 
 </form>
-
+<!-- Link to reset password page -->
 <div class="d-flex flex-column">
   <a class="m-auto" href="{% url 'password_reset' %}">Reset password</a>
 </div>

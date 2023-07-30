@@ -3,7 +3,7 @@
 
 {% block content %}
 
-
+<!--Styles-->
 <style type="text/css">
   .form-signin {
   width: 100%;
@@ -11,7 +11,6 @@
   padding: 15px;
   margin: auto;
   }
-
   .form-signin .form-control {
     position: relative;
     box-sizing: border-box;
@@ -37,25 +36,21 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
-
   .h3{
     text-align: center;
   }
-
 </style>
 
-
+<!--Form begins here-->
 <form class="form-signin" method="post">{% csrf_token %}
   <div class="d-flex flex-column pb-3">
   </div>
   <h1 class="h3 mb-3 font-weight-normal">Register an account</h1>
-
+ 
+  <!--Inputs-->
   <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-
   <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required>
-  
   <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
-
   <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm password" required>
 
   {% for field in registration_form %}
@@ -73,9 +68,7 @@
   {% endif %}
 
   <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-
 </form>
-
 
 {% endblock content %}
 

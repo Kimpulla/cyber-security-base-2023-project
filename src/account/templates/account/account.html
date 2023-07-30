@@ -10,7 +10,6 @@
     padding: 15px;
     margin: auto;
   }
-
   .form-signin .form-control {
     position: relative;
     box-sizing: border-box;
@@ -34,7 +33,6 @@
   .h3{
     text-align: center;
   }
-
   .blog-posts{
     max-width: 500px;
     width: 100%;
@@ -42,16 +40,18 @@
   }
 </style>
 
-
+<!--Form begins here-->
 <form class="form-signin" method="post">{% csrf_token %}
 
   <h1 class="h3 mb-3 font-weight-normal">Account</h1>
-
+  <!-- Email input field -->
   <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus value={{account_form.initial.email}}>
-  
+
+  <!-- Username input field -->
   <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required
   value="{{account_form.initial.username}}">
 
+  <!-- Display errors for each form field -->
   {% for field in account_form %}
       <p>
         {% for error in field.errors %}
@@ -60,6 +60,8 @@
       </p>
   {% endfor %}
   {% if account_form.non_field_errors %}
+
+      <!-- Display non-field errors, if any -->
     <div style="color: red">
       <p>{{account_form.non_field_errors}}</p>
     </div>
@@ -67,17 +69,21 @@
   {% endif %}
 
   {% if success_message %}
+
+      <!-- Display success message, if any -->
     <p style="color:green; text-align: center;">{{success_message}}</p>
   {% endif  %}
 
+  <!-- Submit button -->
   <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
 
 </form>
-
+<!-- Link to change password page -->
 <div class="d-flex flex-column">
   <a class="m-auto" href="{% url 'password_change' %}">Change password</a>
 </div>
 
+<!-- Container for blog posts -->
 <div class="container mt-4 p-4">
   <div class="row">
     <div class="blog-posts">
@@ -89,6 +95,7 @@
         {% endfor %}
         </ul>
       {% else %}
+              <!-- Display message if there are no blog posts -->
         <p>You have no blog posts. Create a post <a href="{% url 'blog:create' %}">here</a>.</p>
       {% endif %}
     </div>
