@@ -30,8 +30,8 @@ Before you begin, ensure you have met the following requirements:
 > pip --version
 
 ## If Python or pip is not installed, please follow this guide
-### https://www.python.org/downloads/ for Python
-### https://pip.pypa.io/en/stable/installation/ for pip
+> https://www.python.org/downloads/ for Python
+> https://pip.pypa.io/en/stable/installation/ for pip
 
 ## Install the requirements
 > pip install -r requirements.txt
@@ -42,10 +42,10 @@ Before you begin, ensure you have met the following requirements:
 To use cyber-security-base-2023-project, follow these steps:
 
 ## Apply the migrations
-python manage.py migrate
+> python manage.py migrate
 
 ## Run the server
-python manage.py runserver
+> python manage.py runserver
 
 ## Then open your browser and navigate to http://localhost:8000.
 
