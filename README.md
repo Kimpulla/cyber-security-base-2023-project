@@ -30,8 +30,10 @@ Before you begin, ensure you have met the following requirements:
 > pip --version
 
 ## If Python or pip is not installed, please follow this guide
-** https://www.python.org/downloads/ for Python **
-** https://pip.pypa.io/en/stable/installation/ for pip **
+
+**https://www.python.org/downloads/ for Python**
+
+**https://pip.pypa.io/en/stable/installation/ for pip**
 
 ## Install the requirements
 > pip install -r requirements.txt
