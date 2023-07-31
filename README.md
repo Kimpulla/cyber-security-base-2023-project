@@ -17,22 +17,22 @@ To install cyber-security-base-2023-project, follow these steps:
 
 Windows, Linux and macOS:
 
-### Clone the repository
+## Clone the repository
 git clone https://github.com/Kimpulla/cyber-security-base-2023-project.git
 
 
-### Install Python and pip if they are not installed
-### Check Python
+## Install Python and pip if they are not installed
+## Check Python
 python --version
 
-### Check pip
+## Check pip
 pip --version
 
-### If Python or pip is not installed, please follow this guide
-### https://www.python.org/downloads/ for Python
-### https://pip.pypa.io/en/stable/installation/ for pip
+## If Python or pip is not installed, please follow this guide
+## https://www.python.org/downloads/ for Python
+## https://pip.pypa.io/en/stable/installation/ for pip
 
-### Install the requirements
+## Install the requirements
 pip install -r requirements.txt
 
 
@@ -40,15 +40,29 @@ Using cyber-security-base-2023-project
 
 To use cyber-security-base-2023-project, follow these steps:
 
-### Apply the migrations
+## Apply the migrations
 python manage.py migrate
 
-### Run the server
+## Run the server
 python manage.py runserver
 
-### Then open your browser and navigate to http://localhost:8000.
+## Then open your browser and navigate to http://localhost:8000.
 
+## Superuser
+Application has superuser:
+email: admin.admin@gmail.com
+password: Superuser123
+username: admin
 
+In case you can't use superuser, you can easily create one;
+
+1. Go to projects source folder project/src
+2. Run the following in the terminal: python manage.py createsuperuser
+3. Then fill usernames, passwords etc.
+
+### You can acces to admin view:
+
+http://localhost:8000/admin/
 
 ## Disclaimer
 
