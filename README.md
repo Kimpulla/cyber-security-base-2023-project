@@ -3,7 +3,7 @@
 
 Assignment from the course Cyber Security Base 2023 to create a web application that has at least five different flaws from the OWASP top ten list as well as their fixes. The application should have a backend.
 
-<In this implementation I made and fixed 5 vulnerabilities from OWASP 2017 top 10 list. 1. SQL injection, 2. Broken Acces Control, 3. Cryptographig Failure, 4. Cross-site Scripting (xss) and 5. Broken authentication. Best way to find vulnerabilities and fixes is to search commits. I committed vulnerabilities and fixes as I found them.>
+> In this implementation I made and fixed 5 vulnerabilities from OWASP 2017 top 10 list. 1. SQL injection, 2. Broken Acces Control, 3. Cryptographig Failure, 4. Cross-site Scripting (xss) and 5. Broken authentication. Best way to find vulnerabilities and fixes is to search commits. I committed vulnerabilities and fixes as I found them.
 
 
 ## Prerequisites
