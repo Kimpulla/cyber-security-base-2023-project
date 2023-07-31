@@ -46,6 +46,8 @@ python manage.py migrate
 ### Run the server
 python manage.py runserver
 
+### Then open your browser and navigate to http://localhost:8000.
+
 
 
 ## Disclaimer
