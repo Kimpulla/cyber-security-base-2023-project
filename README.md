@@ -13,32 +13,31 @@ Before you begin, ensure you have met the following requirements:
     You have installed the latest version of Python
     You have a <Windows/Linux/Mac> machine. State which OS is supported/which is not.
 
-Installing cyber-security-base-2023-project
 
-To install cyber-security-base-2023-project, follow these steps:
+## To install cyber-security-base-2023-project, follow these steps:
 
-Windows, Linux and macOS:
+### Windows, Linux and macOS:
 
-## Clone the repository
-git clone https://github.com/Kimpulla/cyber-security-base-2023-project.git
+### Clone the repository
+> git clone https://github.com/Kimpulla/cyber-security-base-2023-project.git
 
 
-## Install Python and pip if they are not installed
-## Check Python
-python --version
+### Install Python and pip if they are not installed
+### Check Python
+> python --version
 
-## Check pip
-pip --version
+### Check pip
+> pip --version
 
 ## If Python or pip is not installed, please follow this guide
-## https://www.python.org/downloads/ for Python
-## https://pip.pypa.io/en/stable/installation/ for pip
+### https://www.python.org/downloads/ for Python
+### https://pip.pypa.io/en/stable/installation/ for pip
 
 ## Install the requirements
-pip install -r requirements.txt
+> pip install -r requirements.txt
 
 
-Using cyber-security-base-2023-project
+## Using cyber-security-base-2023-project
 
 To use cyber-security-base-2023-project, follow these steps:
 
@@ -64,7 +63,7 @@ In case you can't use superuser, you can easily create one;
 
 ### You can acces to admin view:
 
-http://localhost:8000/admin/
+> http://localhost:8000/admin/
 
 ## Disclaimer
 
